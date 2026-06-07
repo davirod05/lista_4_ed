@@ -22,6 +22,7 @@ class Trie {
 
 private:
     TrieNode* root;
+    int charToIndex(char c);
 
 public:
     Trie();

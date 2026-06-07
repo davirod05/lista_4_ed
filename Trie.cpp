@@ -31,7 +31,26 @@ std::string Trie::toSearchKey(std::string text) {
     return key;
 }
 
+int Trie::charToIndex(char c) {
+    if (c >= 'a' && c <= 'z') return c - 'a';
+    return c - '0' + 26;
+}
+
 bool Trie::insert(Game* game) {
+    std::string key = toSearchKey(game->getTitle());
+    TrieNode* current = root;
+
+    for (int i = 0; i < (int)key.size(); i++) {
+        int index = charToIndex(key[i]);
+        if (current->children[index] == nullptr) {
+            current->children[index] = new TrieNode();
+        }
+        current = current->children[index];
+    }
+
+    current->isEndOfTitle = true;
+    current->game = game;
+    return true;
 }
 
 bool Trie::contains(std::string title) {
