@@ -54,6 +54,18 @@ bool Trie::insert(Game* game) {
 }
 
 bool Trie::contains(std::string title) {
+    std::string key = toSearchKey(title);
+    TrieNode* current = root;
+
+    for (int i = 0; i < (int)key.size(); i++) {
+        int index = charToIndex(key[i]);
+        if (current->children[index] == nullptr) {
+            return false;
+        }
+        current = current->children[index];
+    }
+
+    return current->isEndOfTitle;
 }
 
 void Trie::sortResults(std::vector<Game*>& games) {
