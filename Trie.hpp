@@ -35,6 +35,9 @@ public:
 
     std::string toSearchKey(std::string text);
     void sortResults(std::vector<Game*>& games);
+
+private:
+    void collectGames(TrieNode* node, std::vector<Game*>& results);
 };
 
 #endif
